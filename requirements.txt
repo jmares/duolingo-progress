@@ -1,0 +1,1 @@
+duolingo-api==0.5.1

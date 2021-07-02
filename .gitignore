@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+ll_env/
+*.sqlite3
+*.db
+config.py
