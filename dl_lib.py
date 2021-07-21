@@ -1,12 +1,12 @@
 import logging
 import duolingo
 import sqlite3
+import sys
 from datetime import datetime, date
 from time import time
 
 class DLImport:
 
-# --------------------------------------------------
 
     def __init__(self, db_file, dl_name, dl_pwd):
         self.__dl_langs = []
@@ -15,25 +15,31 @@ class DLImport:
         self.__dl_data = {}
         self.__db_status = {}
 
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
+
         try:
             self.__lingo = duolingo.Duolingo(dl_name, password=dl_pwd)
-            logging.debug('connected to duolingo')
-        except:
-            logging.critical('could not connect to duolingo')
-            raise Exception('Could not connect to duolingo')
+            logging.debug(f"{this_function}: connected to duolingo")
+        except Exception as e:
+            msg = f"{this_function}: could not connect to duolingo - {e}"
+            logging.critical(msg)
+            raise Exception(msg)
 
         try:
             self.__dbc = sqlite3.connect(db_file)
             cur = self.__dbc.cursor()
-            logging.debug('connected to database')
-        except:
-            logging.critical('could not connect to database')
-            raise Exception('Could not connect to database')
+            logging.debug(f"{this_function}: connected to database")
+        except Exception as e:
+            msg = f"{this_function}: could not connect to database - {e}"
+            logging.critical(msg)
+            raise Exception(msg)
 
-# --------------------------------------------------
 
     def import_duo(self):
-        orig = "import_duo"
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
+
         try:
             self.__get_dl_langs()
             self.__get_db_langs()
@@ -43,102 +49,103 @@ class DLImport:
             self.__get_db_status()
             self.__compare_lang_status()
         except Exception as e:
-            mess = orig + ' - ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
-# --------------------------------------------------
 
     def __get_dl_langs(self):
-        orig = "get_dl_langs"
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
+
         try:
             self.__dl_langs = self.__lingo.get_languages(abbreviations=True)
         except Exception as e:
-            mess = orig + ' - ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
-# --------------------------------------------------
 
     def __get_db_langs(self):
-        orig ='get_langs_db'
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
 
         try:
             crs = self.__dbc.cursor()
         except Exception as e:
-            mess = orig + ' failed to connect to database: ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function} failed to connect to database: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         try:
             sql = '''SELECT id FROM duo_langs'''
             crs.execute(sql)
             langs = crs.fetchall()
-            #res = list()
             for lang in langs:
                 self.__db_langs.append(lang[0])
         except Exception as e:
-            mess = orig + ' - ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         crs.close()
 
-# --------------------------------------------------
 
     def __compare_langs(self):
-        orig ='compare_langs'
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
+
         try:
             for abbr in self.__dl_langs:
                 if abbr not in self.__db_langs:
                     self.__add_language(abbr)
         except Exception as e:
-            mess = orig + ' - ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
-# --------------------------------------------------
 
     def __add_language(self, abbr):
-        orig ='add_language'
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
         sql = '''INSERT INTO duo_langs (id, lang, taal) VALUES (?,?,?)'''
         lang = self.__lingo.get_language_from_abbr(abbr)
 
         try:
             crs = self.__dbc.cursor()
         except Exception as e:
-            mess = orig + ' failed to connect to database: ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function} failed to connect to database: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         try:
             crs.execute(sql, (abbr, lang, lang))
             self.__dbc.commit()
         except Exception as e:
-            mess = orig + ' - ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         crs.close()
 
-# --------------------------------------------------
 
     def __import_dl_langs(self):
-        orig ='import_dl_langs'
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
 
         try:
             for l in self.__dl_langs:
                 self.__dl_data[l] = self.__lingo.get_language_progress(l)
         except Exception as e:
-            mess = orig + ' - ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
-# --------------------------------------------------
 
     def __update_db_data(self):
 
-        orig ='update_db_data'
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
         res = True
         now = datetime.now()
         day = now.strftime('%Y-%m-%d')
@@ -146,9 +153,9 @@ class DLImport:
         try:
             crs = self.__dbc.cursor()
         except Exception as e:
-            mess = orig + ' failed to connect to database: ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function} failed to connect to database: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         sql ='''REPLACE INTO duo_data (id, date, points, level, level_progress,
             level_percent, level_points, level_left, next_level,
@@ -166,24 +173,24 @@ class DLImport:
                     dld["points_rank"]))
                 self.__dbc.commit()
             except Exception as e:
-                mess = orig + ' - ' + ' lang ' + key + ' - ' + str(e)
-                logging.error(mess)
-                raise Exception(mess)
+                msg = f"{this_function} - language {key}: {e}"
+                logging.error(msg)
+                raise Exception(msg)
 
         crs.close()
 
-# --------------------------------------------------
 
     def __get_db_status(self):
-        orig ='get_db_statuses'
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
 
         try:
             self.__dbc.row_factory = sqlite3.Row
             crs = self.__dbc.cursor()
         except Exception as e:
-            mess = orig + ' failed to connect to database: ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function} failed to connect to database: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         try:
             sql = '''SELECT * FROM duo_status ORDER BY points DESC'''
@@ -196,16 +203,16 @@ class DLImport:
                     d =  dict(lang)
                     self.__db_status[d["id"]] = d
         except Exception as e:
-            mess = orig + ' - ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         crs.close()
 
-# --------------------------------------------------
 
     def __compare_lang_status(self):
-        orig ='compare_lang_status'
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
         currday = date.today()
         currdaystr = date.today().isoformat()
 
@@ -262,44 +269,44 @@ class DLImport:
                     # moet iets misgelopen zijn
                     pi = 3.14
         except Exception as e:
-            mess = orig + ' - ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
-# --------------------------------------------------
 
     def __update_lang_status(self, sql, lst):
-        orig ='update_lang_status'
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
 
         try:
             crs = self.__dbc.cursor()
         except Exception as e:
-            mess = orig + " failed to connect to database: " + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function} failed to connect to database: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         try:
             crs.execute(sql, lst)
             self.__dbc.commit()
         except Exception as e:
-            mess = orig + ' - ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         crs.close()
 
-# --------------------------------------------------
 
     def export_html(self, template, destination):
-        orig ='export_html'
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
         table = ''
 
         try:
             crs = self.__dbc.cursor()
         except Exception as e:
-            mess = orig + ' failed to connect to database: ' + str(e)
-            logging.error(mess)
-            raise Exception(mess)
+            msg = f"{this_function} failed to connect to database: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         sql = '''SELECT l.lang, s.level, s.points, s.streak_start, s.streak_end,
                         s.level_percent, s.num_skills_learned
@@ -326,9 +333,9 @@ class DLImport:
                 table += '    <td>'+ str(row[4]) +'</td>'
                 table += '  </tr>\n'
         except Exception as e:
-            logging.error(orig + ' - ' + str(e))
-            table = '<tr><td colspan="7">' + str(e) + '</td></tr>'
-            res = False
+            msg = f"{this_function}: {e}"
+            logging.error(msg)
+            raise Exception(msg)
 
         now = datetime.now()
         last_update = 'Last update: ' + now.strftime('%d/%m/%Y %H:%M')
@@ -342,11 +349,12 @@ class DLImport:
             ftemp.close()
             fpage.close()
         except Exception as e:
-            logging.error(orig + ' - ' + str(e))
+            msg = f"{this_function}: {e}"
 
-# --------------------------------------------------
 
     def __del__(self):
+        this_function = self.__class__.__name__ + '.' + sys._getframe().f_code.co_name
+        logging.info(f"{this_function}: start")
+
         self.__dbc.close()
 
-# --------------------------------------------------
