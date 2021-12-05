@@ -4,3 +4,4 @@ ll_env/
 *.sqlite3
 *.db
 config.py
+messages.txt

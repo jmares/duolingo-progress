@@ -1,5 +1,8 @@
 import logging
-import duolingo
+import duolingoapi
+# Had to stop using duolingo-api becuase Duolingo removed 'points_rank' from api, 
+# which resulted in error. Am no longer using pypi package, but downloaded the file
+# from GitHub and removed 'points_rank' [https://github.com/KartikTalwar/Duolingo/blob/master/duolingo.py](https://github.com/KartikTalwar/Duolingo/blob/master/duolingo.py)
 import sqlite3
 import sys
 from datetime import datetime, date
@@ -19,7 +22,7 @@ class DLImport:
         logging.info(f"{this_function}: start")
 
         try:
-            self.__lingo = duolingo.Duolingo(dl_name, password=dl_pwd)
+            self.__lingo = duolingoapi.Duolingo(dl_name, password=dl_pwd)
             logging.debug(f"{this_function}: connected to duolingo")
         except Exception as e:
             msg = f"{this_function}: could not connect to duolingo - {e}"
@@ -157,20 +160,32 @@ class DLImport:
             logging.error(msg)
             raise Exception(msg)
 
+# As 2021-12-04 'points_rank' was no longer available from Duolingo API
+#        sql ='''REPLACE INTO duo_data (id, date, points, level, level_progress,
+#            level_percent, level_points, level_left, next_level,
+#            num_skills_learned, points_rank)
+#            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+
         sql ='''REPLACE INTO duo_data (id, date, points, level, level_progress,
             level_percent, level_points, level_left, next_level,
-            num_skills_learned, points_rank)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+            num_skills_learned)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
 
         for key in self.__dl_data:
             try:
                 dld = self.__dl_data[key]
+# As 2021-12-04 'points_rank' was no longer available
+#                crs.execute(sql,
+#                    (key, day, dld["points"], dld["level"],
+#                    dld["level_progress"], dld["level_percent"],
+#                    dld["level_points"], dld["level_left"],
+#                    dld["next_level"], dld["num_skills_learned"],
+#                    dld["points_rank"]))
                 crs.execute(sql,
                     (key, day, dld["points"], dld["level"],
                     dld["level_progress"], dld["level_percent"],
                     dld["level_points"], dld["level_left"],
-                    dld["next_level"], dld["num_skills_learned"],
-                    dld["points_rank"]))
+                    dld["next_level"], dld["num_skills_learned"]))
                 self.__dbc.commit()
             except Exception as e:
                 msg = f"{this_function} - language {key}: {e}"
@@ -221,15 +236,25 @@ class DLImport:
             for key in langs:
                 lang = langs[key]
                 if (not self.__db_status or key not in self.__db_status):
+# As 2021-12-04 'points_rank' was no longer available from Duolingo API
+#                    sql = '''REPLACE INTO duo_status (id, points, level,
+#                        level_progress, level_percent, level_points, level_left,
+#                        next_level, num_skills_learned, points_rank, streak_start,
+#                        streak_end)
+#                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+#                    lst = (key, lang["points"], lang["level"], lang["level_progress"],
+#                        lang["level_percent"], lang["level_points"], lang["level_left"],
+#                        lang["next_level"], lang["num_skills_learned"],
+#                        lang["points_rank"], currday, currday)
                     sql = '''REPLACE INTO duo_status (id, points, level,
                         level_progress, level_percent, level_points, level_left,
-                        next_level, num_skills_learned, points_rank, streak_start,
+                        next_level, num_skills_learned, streak_start,
                         streak_end)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
                     lst = (key, lang["points"], lang["level"], lang["level_progress"],
                         lang["level_percent"], lang["level_points"], lang["level_left"],
                         lang["next_level"], lang["num_skills_learned"],
-                        lang["points_rank"], currday, currday)
+                        currday, currday)
                     self.__update_lang_status(sql, lst)
                 elif (lang["points"] != self.__db_status[key]["points"]):
                     strklst = self.__db_status[key]["streak_end"].split('-')
@@ -238,29 +263,51 @@ class DLImport:
 
                     if (delta > 1):
                         # streak was discontinued, first day of new streak
+# As 2021-12-04 'points_rank' was no longer available from Duolingo API
+#                        sql = '''REPLACE INTO duo_status (id, points, level,
+#                            level_progress, level_percent, level_points,
+#                            level_left, next_level, num_skills_learned,
+#                            points_rank, streak_start, streak_end)
+#                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+#                        lst = (key, lang["points"], lang["level"],
+#                            lang["level_progress"], lang["level_percent"],
+#                            lang["level_points"], lang["level_left"],
+#                            lang["next_level"], lang["num_skills_learned"],
+#                            lang["points_rank"], currdaystr, currdaystr)
                         sql = '''REPLACE INTO duo_status (id, points, level,
                             level_progress, level_percent, level_points,
                             level_left, next_level, num_skills_learned,
-                            points_rank, streak_start, streak_end)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+                            streak_start, streak_end)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
                         lst = (key, lang["points"], lang["level"],
                             lang["level_progress"], lang["level_percent"],
                             lang["level_points"], lang["level_left"],
                             lang["next_level"], lang["num_skills_learned"],
-                            lang["points_rank"], currdaystr, currdaystr)
+                            currdaystr, currdaystr)
                         self.__update_lang_status(sql, lst)
                     else:
                         # streak continues, streak_start doesn't change
+#                        sql = '''REPLACE INTO duo_status (id, points, level,
+#                            level_progress, level_percent, level_points,
+#                            level_left, next_level, num_skills_learned,
+#                            points_rank, streak_start, streak_end)
+#                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+#                        lst = (key, lang["points"], lang["level"],
+#                            lang["level_progress"], lang["level_percent"],
+#                            lang["level_points"], lang["level_left"],
+#                            lang["next_level"], lang["num_skills_learned"],
+#                            lang["points_rank"],
+#                            self.__db_status[key]["streak_start"],
+#                            currdaystr)
                         sql = '''REPLACE INTO duo_status (id, points, level,
                             level_progress, level_percent, level_points,
                             level_left, next_level, num_skills_learned,
-                            points_rank, streak_start, streak_end)
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
+                            streak_start, streak_end)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'''
                         lst = (key, lang["points"], lang["level"],
                             lang["level_progress"], lang["level_percent"],
                             lang["level_points"], lang["level_left"],
                             lang["next_level"], lang["num_skills_learned"],
-                            lang["points_rank"],
                             self.__db_status[key]["streak_start"],
                             currdaystr)
                         self.__update_lang_status(sql, lst)

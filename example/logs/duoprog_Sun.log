@@ -1,0 +1,154 @@
+2021-12-05 10:21:46,220 - INFO : DLImport.__del__: start
+2021-12-05 10:30:45,681 - INFO : main: start
+2021-12-05 10:30:45,704 - INFO : DLImport.__init__: start
+2021-12-05 10:30:45,729 - DEBUG : Starting new HTTPS connection (1): duolingo.com:443
+2021-12-05 10:30:46,196 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:30:46,233 - DEBUG : Starting new HTTPS connection (1): www.duolingo.com:443
+2021-12-05 10:30:46,709 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 401 254
+2021-12-05 10:30:47,137 - DEBUG : https://www.duolingo.com:443 "POST /login HTTP/1.1" 200 None
+2021-12-05 10:30:47,234 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:30:49,423 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1203337
+2021-12-05 10:30:50,175 - DEBUG : DLImport.__init__: connected to duolingo
+2021-12-05 10:30:50,176 - DEBUG : DLImport.__init__: connected to database
+2021-12-05 10:30:50,176 - INFO : DLImport.import_duo: start
+2021-12-05 10:30:50,176 - INFO : DLImport.__get_dl_langs: start
+2021-12-05 10:30:50,176 - INFO : DLImport.__get_db_langs: start
+2021-12-05 10:30:50,177 - INFO : DLImport.__compare_langs: start
+2021-12-05 10:30:50,177 - INFO : DLImport.__import_dl_langs: start
+2021-12-05 10:30:51,438 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 322962
+2021-12-05 10:30:51,807 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:30:53,691 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1213854
+2021-12-05 10:30:55,167 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 398390
+2021-12-05 10:30:55,447 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:30:56,660 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1289288
+2021-12-05 10:30:58,196 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 124934
+2021-12-05 10:30:58,292 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:31:00,449 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1015826
+2021-12-05 10:31:02,292 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 397688
+2021-12-05 10:31:02,578 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:31:04,135 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1288597
+2021-12-05 10:31:05,876 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 312458
+2021-12-05 10:31:06,068 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:31:07,822 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1203347
+2021-12-05 10:31:08,475 - INFO : DLImport.__update_db_data: start
+2021-12-05 10:31:08,475 - ERROR : DLImport.__update_db_data - language es: 10 values for 11 columns
+2021-12-05 10:31:08,475 - ERROR : DLImport.import_duo: DLImport.__update_db_data - language es: 10 values for 11 columns
+2021-12-05 10:31:08,486 - INFO : DLImport.__del__: start
+2021-12-05 10:32:53,584 - INFO : main: start
+2021-12-05 10:32:53,607 - INFO : DLImport.__init__: start
+2021-12-05 10:32:53,632 - DEBUG : Starting new HTTPS connection (1): duolingo.com:443
+2021-12-05 10:32:54,104 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:32:54,136 - DEBUG : Starting new HTTPS connection (1): www.duolingo.com:443
+2021-12-05 10:32:54,607 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 401 254
+2021-12-05 10:32:54,980 - DEBUG : https://www.duolingo.com:443 "POST /login HTTP/1.1" 200 None
+2021-12-05 10:32:55,076 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:32:57,696 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1203345
+2021-12-05 10:32:58,264 - DEBUG : DLImport.__init__: connected to duolingo
+2021-12-05 10:32:58,266 - DEBUG : DLImport.__init__: connected to database
+2021-12-05 10:32:58,266 - INFO : DLImport.import_duo: start
+2021-12-05 10:32:58,266 - INFO : DLImport.__get_dl_langs: start
+2021-12-05 10:32:58,266 - INFO : DLImport.__get_db_langs: start
+2021-12-05 10:32:58,267 - INFO : DLImport.__compare_langs: start
+2021-12-05 10:32:58,267 - INFO : DLImport.__import_dl_langs: start
+2021-12-05 10:32:59,703 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 322962
+2021-12-05 10:32:59,809 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:33:01,996 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1213854
+2021-12-05 10:33:03,226 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 398390
+2021-12-05 10:33:05,783 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:33:07,747 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1289282
+2021-12-05 10:33:09,779 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 124930
+2021-12-05 10:33:09,875 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:33:11,865 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1015826
+2021-12-05 10:33:14,080 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 397693
+2021-12-05 10:33:14,543 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:33:18,688 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1288590
+2021-12-05 10:33:20,633 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 312458
+2021-12-05 10:33:20,825 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:33:23,194 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1203343
+2021-12-05 10:33:23,764 - INFO : DLImport.__update_db_data: start
+2021-12-05 10:33:23,772 - INFO : DLImport.__get_db_status: start
+2021-12-05 10:33:23,773 - INFO : DLImport.__compare_lang_status: start
+2021-12-05 10:33:23,774 - ERROR : DLImport.__compare_lang_status: 'points_rank'
+2021-12-05 10:33:23,774 - ERROR : DLImport.import_duo: DLImport.__compare_lang_status: 'points_rank'
+2021-12-05 10:33:23,822 - INFO : DLImport.__del__: start
+2021-12-05 10:38:09,313 - INFO : main: start
+2021-12-05 10:38:09,313 - INFO : DLImport.__init__: start
+2021-12-05 10:38:09,336 - DEBUG : Starting new HTTPS connection (1): duolingo.com:443
+2021-12-05 10:38:09,806 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:38:09,848 - DEBUG : Starting new HTTPS connection (1): www.duolingo.com:443
+2021-12-05 10:38:10,318 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 401 254
+2021-12-05 10:38:10,698 - DEBUG : https://www.duolingo.com:443 "POST /login HTTP/1.1" 200 None
+2021-12-05 10:38:10,817 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:38:12,681 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1213850
+2021-12-05 10:38:13,257 - DEBUG : DLImport.__init__: connected to duolingo
+2021-12-05 10:38:13,258 - DEBUG : DLImport.__init__: connected to database
+2021-12-05 10:38:13,258 - INFO : DLImport.import_duo: start
+2021-12-05 10:38:13,258 - INFO : DLImport.__get_dl_langs: start
+2021-12-05 10:38:13,258 - INFO : DLImport.__get_db_langs: start
+2021-12-05 10:38:13,258 - INFO : DLImport.__compare_langs: start
+2021-12-05 10:38:13,258 - INFO : DLImport.__import_dl_langs: start
+2021-12-05 10:38:14,843 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 398384
+2021-12-05 10:38:17,183 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:38:19,352 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1289286
+2021-12-05 10:38:20,894 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 124934
+2021-12-05 10:38:20,992 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:38:22,118 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1015826
+2021-12-05 10:38:24,270 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 397696
+2021-12-05 10:38:24,911 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:38:26,395 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1288581
+2021-12-05 10:38:28,367 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 312460
+2021-12-05 10:38:28,819 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:38:31,133 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1203353
+2021-12-05 10:38:31,888 - INFO : DLImport.__update_db_data: start
+2021-12-05 10:38:31,895 - INFO : DLImport.__get_db_status: start
+2021-12-05 10:38:31,896 - INFO : DLImport.__compare_lang_status: start
+2021-12-05 10:38:31,896 - INFO : DLImport.__update_lang_status: start
+2021-12-05 10:38:31,896 - ERROR : DLImport.__update_lang_status: 12 values for 11 columns
+2021-12-05 10:38:31,896 - ERROR : DLImport.__compare_lang_status: DLImport.__update_lang_status: 12 values for 11 columns
+2021-12-05 10:38:31,896 - ERROR : DLImport.import_duo: DLImport.__compare_lang_status: DLImport.__update_lang_status: 12 values for 11 columns
+2021-12-05 10:38:31,909 - INFO : DLImport.__del__: start
+2021-12-05 10:41:04,715 - INFO : main: start
+2021-12-05 10:41:04,715 - INFO : DLImport.__init__: start
+2021-12-05 10:41:04,740 - DEBUG : Starting new HTTPS connection (1): duolingo.com:443
+2021-12-05 10:41:05,205 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:41:05,232 - DEBUG : Starting new HTTPS connection (1): www.duolingo.com:443
+2021-12-05 10:41:05,647 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 401 254
+2021-12-05 10:41:06,067 - DEBUG : https://www.duolingo.com:443 "POST /login HTTP/1.1" 200 None
+2021-12-05 10:41:06,163 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:41:09,447 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1203341
+2021-12-05 10:41:10,020 - DEBUG : DLImport.__init__: connected to duolingo
+2021-12-05 10:41:10,020 - DEBUG : DLImport.__init__: connected to database
+2021-12-05 10:41:10,020 - INFO : DLImport.import_duo: start
+2021-12-05 10:41:10,020 - INFO : DLImport.__get_dl_langs: start
+2021-12-05 10:41:10,020 - INFO : DLImport.__get_db_langs: start
+2021-12-05 10:41:10,021 - INFO : DLImport.__compare_langs: start
+2021-12-05 10:41:10,021 - INFO : DLImport.__import_dl_langs: start
+2021-12-05 10:41:11,703 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 322962
+2021-12-05 10:41:13,680 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:41:14,810 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1213856
+2021-12-05 10:41:16,205 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 398390
+2021-12-05 10:41:18,821 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:41:20,301 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1289282
+2021-12-05 10:41:21,653 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 124934
+2021-12-05 10:41:21,749 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:41:23,578 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1015822
+2021-12-05 10:41:25,547 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 397697
+2021-12-05 10:41:25,830 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:41:28,493 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1288589
+2021-12-05 10:41:30,644 - DEBUG : https://www.duolingo.com:443 "POST /switch_language HTTP/1.1" 200 312454
+2021-12-05 10:41:30,926 - DEBUG : https://duolingo.com:443 "GET /users/johmar HTTP/1.1" 302 169
+2021-12-05 10:41:33,511 - DEBUG : https://www.duolingo.com:443 "GET /users/johmar HTTP/1.1" 200 1203355
+2021-12-05 10:41:34,166 - INFO : DLImport.__update_db_data: start
+2021-12-05 10:41:34,173 - INFO : DLImport.__get_db_status: start
+2021-12-05 10:41:34,173 - INFO : DLImport.__compare_lang_status: start
+2021-12-05 10:41:34,173 - INFO : DLImport.__update_lang_status: start
+2021-12-05 10:41:34,174 - INFO : DLImport.__update_lang_status: start
+2021-12-05 10:41:34,176 - INFO : DLImport.__update_lang_status: start
+2021-12-05 10:41:34,177 - INFO : DLImport.__update_lang_status: start
+2021-12-05 10:41:34,178 - INFO : DLImport.__update_lang_status: start
+2021-12-05 10:41:34,180 - INFO : DLImport.export_html: start
+2021-12-05 10:41:34,182 - INFO : main: time needed for script: 29.466 seconds
+
+2021-12-05 10:41:34,182 - DEBUG : main: stop main
+
+2021-12-05 10:41:34,182 - INFO : DLImport.__del__: start
